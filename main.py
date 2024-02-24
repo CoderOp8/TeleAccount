@@ -69,12 +69,12 @@ async def main_handler(bot, m):
         await m.reply("⏳ Refreshing Yout Account Lists...")
         inf = await Refresh.refresh()
         text = f'''
-Scan complete!
-Results:
-  total accounts: {inf["total"]}
-  banned: {inf["banned"]}
-  revoked: {inf["revoked"]}
-  remaining accounts: {inf["remain"]}
+✅ Refreshed Successfully
+🔻 Refresh Info :
+• Total Accounts : {inf["total"]}
+- Banned Accounts : {inf["banned"]}
+- Revoked Accounts : {inf["revoked"]}
+• Remaining Accounts : {inf["remain"]}
         '''
         return await m.reply(text)
 
