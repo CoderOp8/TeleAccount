@@ -29,7 +29,7 @@ async def main_handler(bot, m):
         try:
             count = pc()
             result = await Execute(command, kwargs)
-            return await m.reply(f"✅ Task Result: {result['done']}/{result['total']} Accounts\n⏳ Estimated Time Taken: {pc() - count}s\n\n🔺By @CoderOp | @Kerolis55463")
+            return await m.reply(f"✅ Task Result: {result['done']}/{result['total']} Accounts\n⏳ Estimated Time Taken: {pc() - count}s\n\n🔺By @CoderOp")
         except Exception as e:
             logger.error(e)
             return await m.reply("Invalid Arguments")
@@ -71,10 +71,13 @@ async def main_handler(bot, m):
         text = f'''
 ✅ Refreshed Successfully
 🔻 Refresh Info :
+
 • Total Accounts : {inf["total"]}
 - Banned Accounts : {inf["banned"]}
 - Revoked Accounts : {inf["revoked"]}
 • Remaining Accounts : {inf["remain"]}
+
+👀 Owner : @CoderOP
         '''
         return await m.reply(text)
 
