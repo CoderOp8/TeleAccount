@@ -32,7 +32,7 @@ async def main_handler(bot, m):
             return await m.reply(f"✅ Task Result: {result['done']}/{result['total']} Accounts\n⏳ Estimated Time Taken: {pc() - count}s\n\n🔺By @CoderOp")
         except Exception as e:
             logger.error(e)
-            return await m.reply("Invalid Arguments")
+            return await m.reply("⚠️ Please Check The Code Again.")
 
     elif command == "run":
         if m.reply_to_message is not None:
