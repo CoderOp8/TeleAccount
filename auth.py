@@ -16,13 +16,13 @@ if os.path.isfile("auth.json"):
 console.print("Hi, welcome to the TeleAccountManager-V2 Tool, aka [i]TAM-V2[/i]", style="bold green")
 
 console.print('''
-Please be aware that the Tool is tottaly [bold green]FREE[/bold green] And it has no price
+TOOL CREATED BY [bold green]CODERO_OP8[/bold green] And it has no price
 [bold red]Be aware of scammers :warning::warning: !![/bold red]
 ''', style="bold yellow")
 
-api_id = console.input("What is your API_ID :id_button:\n")
+api_id = console.input("Enter your API_ID :id_button:\n")
 
-api_hash = console.input("What is your API_HASH :japanese_bargain_button:\n")
+api_hash = console.input("Enter your API_HASH :japanese_bargain_button:\n")
 
 with open("auth.json", "w") as f:
     data = {
