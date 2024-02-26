@@ -66,16 +66,16 @@ async def main_handler(bot, m):
             return await m.reply("Please but a phone number to delete")
 
     elif command == "refresh":
-        await m.reply("⏳ Refreshing Yout Account Lists...")
+        await m.reply("⏳ Refreshing Your Account Lists...")
         inf = await Refresh.refresh()
         text = f'''
-✅ Refreshed Successfully
+🔎 Refreshed Successfully
 🔻 Refresh Info :
 
-• Total Accounts : {inf["total"]}
-- Banned Accounts : {inf["banned"]}
-- Revoked Accounts : {inf["revoked"]}
-• Remaining Accounts : {inf["remain"]}
+🗄 Total Accounts : {inf["total"]}
+❗️ Banned Accounts : {inf["banned"]}
+❕ Revoked Accounts : {inf["revoked"]}
+✅ Remaining Accounts : {inf["remain"]}
 
 👀 Owner : @CoderOP
         '''
