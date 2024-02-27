@@ -63,14 +63,13 @@ async def main_handler(bot, m):
                 return await m.reply(f"Deleted {account}✅")
             return await m.reply("This phone number is not in the DB")
         except:
-            return await m.reply("Please but a phone number to delete")
+            return await m.reply("⚠️ Please Check The Code Again.")
 
     elif command == "refresh":
         await m.reply("⏳ Refreshing Your Account Lists...")
         inf = await Refresh.refresh()
         text = f'''
 🔎 Refreshed Successfully
-🔻 Refresh Info :
 
 🗄 Total Accounts : {inf["total"]}
 ❗️ Banned Accounts : {inf["banned"]}
