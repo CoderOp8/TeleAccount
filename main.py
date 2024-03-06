@@ -25,11 +25,11 @@ async def main_handler(bot, m):
 
     if command in ["send_message", "join_chats","leave_chats", "ref","click","send_contact", "add_contact", "send_reaction","send_vote", "unsend_vote", "export_chats","captcha", "watch"]:
         kwargs = parse_kwargs(m.text, txt[0])
-        await m.reply("📋 Executing Your Task...")
+        await m.reply("🔎 Executing The Task...")
         try:
             count = pc()
             result = await Execute(command, kwargs)
-            return await m.reply(f"✅ Task Result: {result['done']}/{result['total']} Accounts\n⏳ Estimated Time Taken: {pc() - count}s\n\n🔺By @CoderOp")
+            return await m.reply(f"✨ Task Executed: {result['done']}/{result['total']} Accounts\n🕚 Estimated Time Taken: {pc() - count}s\n\n🔺By @CoderOp")
         except Exception as e:
             logger.error(e)
             return await m.reply("⚠️ Please Check The Code Again.")
@@ -40,7 +40,7 @@ async def main_handler(bot, m):
                 script = m.reply_to_message.document
                 await m.reply_to_message.download(script.file_name)
 
-                await m.reply(f"📋Executing Your Task... {script.file_name.replace('.json','')}")
+                await m.reply(f"🔎 Executing The Task... {script.file_name.replace('.json','')}")
                 count = pc()
                 result = await Run(bot,m,f"downloads/{script.file_name}")
                 return await m.reply(f"Finished {script.file_name.replace('.json', '')} in {pc() - count} Seconds ✅")
@@ -66,17 +66,17 @@ async def main_handler(bot, m):
             return await m.reply("⚠️ Please Check The Code Again.")
 
     elif command == "refresh":
-        await m.reply("⏳ Refreshing Your Account Lists...")
+        await m.reply("💢 Refreshing Accounts...")
         inf = await Refresh.refresh()
         text = f'''
-🔎 Refreshed Successfully
+✅ Refreshed Account Lists Details:
 
-🗄 Total Accounts : {inf["total"]}
-❗️ Banned Accounts : {inf["banned"]}
-❕ Revoked Accounts : {inf["revoked"]}
-✅ Remaining Accounts : {inf["remain"]}
+📂 Total Accounts : {inf["total"]}
+🚫 Banned Accounts : {inf["banned"]}
+⚠️ Revoked Accounts : {inf["revoked"]}
+☑️ Remaining Accounts : {inf["remain"]}
 
-👀 Owner : @CoderOP
+✨ Owner : @CoderOP
         '''
         return await m.reply(text)
 
