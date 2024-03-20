@@ -3,6 +3,7 @@ from Tools.client import Execute, Run
 from Tools.parser import parse_kwargs
 from Tools.info import logger, db
 from Tools.methods.refresh import Refresh
+from Tools.methods.get_code import GetCode
 from time import perf_counter as pc
 
 client = Client(
@@ -30,6 +31,7 @@ async def main_handler(bot, m):
             count = pc()
             result = await Execute(command, kwargs)
             return await m.reply(f"✅ Task Executed: {result['done']}/{result['total']} Accounts\n🕚 Estimated Time Taken: {pc() - count}s\n\n🔺By @CoderOp")
+
         except Exception as e:
             logger.error(e)
             return await m.reply("⚠️ Please Check The Code Again.")
@@ -40,10 +42,10 @@ async def main_handler(bot, m):
                 script = m.reply_to_message.document
                 await m.reply_to_message.download(script.file_name)
 
-                await m.reply(f"🔎 Executing The Task... {script.file_name.replace('.json','')}")
+                await m.reply(f"Executing {script.file_name.replace('.json','')}⏰")
                 count = pc()
                 result = await Run(bot,m,f"downloads/{script.file_name}")
-                return await m.reply(f"Finished {script.file_name.replace('.json', '')} in {pc() - count} Seconds ✅")
+                return await m.reply(f"Finished {script.file_name.replace('.json', '')} in {pc() - count} Seconds✅")
 
 
         return await m.reply('Please reply to a message that has a script')
@@ -63,21 +65,47 @@ async def main_handler(bot, m):
                 return await m.reply(f"Deleted {account}✅")
             return await m.reply("This phone number is not in the DB")
         except:
-            return await m.reply("⚠️ Please Check The Code Again.")
+            return await m.reply("Please put a phone number to delete")
 
     elif command == "refresh":
-        await m.reply("💢 Refreshing Accounts...")
+        await m.reply("🔺 Refreshing Accounts")
         inf = await Refresh.refresh()
         text = f'''
 🔎 Refreshed Account Lists Details:
 
+
+
 🗄 Total Accounts : {inf["total"]}
+
 ❗️ Banned Accounts : {inf["banned"]}
+
 ❕ Revoked Accounts : {inf["revoked"]}
+
 ✅ Remaining Accounts : {inf["remain"]}
 
+
+
 ✨ Owner : @CoderOP
+
         '''
         return await m.reply(text)
+
+    elif command == "get_code":
+        try:
+            account = txt[1]
+            if db.check_exist(account):
+                ss = db.get_account_info(account)["session_string"]
+                code  = await GetCode.get_code(account, ss)
+                if isinstance(code, str):
+                    return await m.reply(f"{account} code is {code}")
+                elif code is None:
+                    return await m.reply("did not recive the code yet!")
+                elif code is False:
+                    db.delete_account(account)
+                    return await m.reply(f"{acccount} Is Banned 📛")
+            return await m.reply("This phone number is not in the DB")
+        except Exception as e:
+            print(e)
+            return await m.reply("Please but a phone number")
 
 client.run()
