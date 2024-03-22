@@ -73,17 +73,10 @@ async def main_handler(bot, m):
         text = f'''
 🔎 Refreshed Account Lists Details:
 
-
-
 🗄 Total Accounts : {inf["total"]}
-
 ❗️ Banned Accounts : {inf["banned"]}
-
 ❕ Revoked Accounts : {inf["revoked"]}
-
 ✅ Remaining Accounts : {inf["remain"]}
-
-
 
 ✨ Owner : @CoderOP
 
