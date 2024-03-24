@@ -4,8 +4,8 @@ import asyncio
 async def loop():
     while True:
         print('''\033[1;32;40m
-1- Add
-2/q/exit- Quit
+Enter 1 To Add A New Account
+Enter 2/q To Return
 \033[0;40m''')
         choice = input("\033[1;33;40m>> \033[0;40m")
 
