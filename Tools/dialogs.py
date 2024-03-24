@@ -19,31 +19,31 @@ async def binput(text):
 
 async def create_account():
     password=""
-    print(f"{r}Type phone number with +\nExample: +2018421981{w}")
+    print(f"{r}📞 Enter The Phone Number With Country Code{w}")
     phone_number = await binput(g)
     if phone_number == "":
         exit()
     if not db.check_exist(phone_number):
-        app = Client(phone_number,api_id, api_hash, device_model="AccountManagerV2", in_memory=True)
+        app = Client(phone_number,api_id, api_hash, device_model="CoderOP", in_memory=True)
         try:
             await app.connect()
             sent_code = await app.send_code(phone_number)
-            print(f"{r}Type the code that has been sent to you✉️{w}")
+            print(f"{r}☑️ Enter The Verification Code{w}")
             code = await binput(g)
             do_it = True
             try:
     	        await app.sign_in(phone_number=phone_number, phone_code_hash=sent_code.phone_code_hash, phone_code=code)
             except BadRequest:
-    	        print("\033[1;31;40mCode Invalid!!, type it again\033[0;40m")
+    	        print("\033[1;31;40m✖️ Invalid Code , Try Again\033[0;40m")
     	        code = await binput(g)
     	        while True:
     	            try:
-    	                print("\033[1;31;40mChecking Code💬\033[0;40m")
+    	                print("\033[1;31;40mValidating...\033[0;40m")
     	                await app.sign_in(phone_number=phone_number, phone_code_hash=sent_code.phone_code_hash, phone_code=code)
-    	                print('\033[1;31;40mCorrect Code✅\033[0;40m')
+    	                print('\033[1;31;40m☑️ Success\033[0;40m')
     	                break
     	            except BadRequest:
-    	                print("\033[1;31;40mCode Invalid!!, type it again")
+    	                print("\033[1;31;40m✖️ Invalid Code , Try Again")
     	                code = await binput(g)
     	            except SessionPasswordNeeded:
     	                break
@@ -56,11 +56,11 @@ async def create_account():
     	        while True:
         	       try:
         	           print('\033[1;31;40mChecking Password🔑\033[0;40m')
-        	           await app.check_password(password)
+        	           await app.check_password(mm)
         	           break
         	       except BadRequest as e:
         	            if e.ID == "PASSWORD_HASH_INVALID":
-        	                print(f"{r}Password Invalid🔑❌ Send Password:{w}")
+        	                print(f"{r}🔑 Enter The Password:{w}")
         	                password = await binput(g)
         	            else:
         	                log(e.ID)
@@ -79,12 +79,12 @@ async def create_account():
                  except:
                      pass
                  db.add_account(phone_number, session_string, password)
-                 print(f"\033[1;32;40mSigned in to {phone_number} Successfully✅\033[0;40m")
+                 print(f"\033[1;32;40mAdded {phone_number} To Database✅\033[0;40m")
             else:
-                 print("\033[1;31;40mFailed to login❗\033[0;40m")
+                 print("\033[1;31;40mSomething Went Wrong , Login Failed❗\033[0;40m")
         except Exception as e:
             logger.exception(e)
-            print(f"{r}Phone number Invalid{w}")
+            print(f"{r}PLease Check The Number Agiain{w}")
     else:
     	print(f"{r}Account Already In DB!{w}")
 
