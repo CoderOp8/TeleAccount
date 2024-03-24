@@ -24,7 +24,7 @@ async def create_account():
     if phone_number == "":
         exit()
     if not db.check_exist(phone_number):
-        app = Client(phone_number,api_id, api_hash, device_model="CoderOP", in_memory=True)
+        app = Client(phone_number,api_id, api_hash, device_model="NASA Scripters", in_memory=True)
         try:
             await app.connect()
             sent_code = await app.send_code(phone_number)
