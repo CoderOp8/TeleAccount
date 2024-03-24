@@ -55,12 +55,12 @@ async def create_account():
             except SessionPasswordNeeded:
     	        while True:
         	       try:
-        	           print('\033[1;31;40mChecking Password🔑\033[0;40m')
-        	           await app.check_password(mm)
+        	           print('\033[1;31;40mℹ️ This Account Contains 2FA\033[0;40m')
+        	           await app.check_password(password)
         	           break
         	       except BadRequest as e:
         	            if e.ID == "PASSWORD_HASH_INVALID":
-        	                print(f"{r}🔑 Enter The Password:{w}")
+        	                print(f"{r}🔑 Enter The 2FA Password:{w}")
         	                password = await binput(g)
         	            else:
         	                log(e.ID)
