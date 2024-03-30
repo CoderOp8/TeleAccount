@@ -5,6 +5,7 @@ from Tools.info import logger, db
 from Tools.methods.refresh import Refresh
 from Tools.methods.get_code import GetCode
 from time import perf_counter as pc
+from rich.console import Console
 
 client = Client(
     "MainAccount"
