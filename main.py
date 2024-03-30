@@ -16,6 +16,8 @@ def is_me(filter,cli,update):
     except:
         return False
 
+console.print("🚀 NASA Script Is Running...", style="bold green")
+
 IsMe = filters.create(is_me, "IsMe")
 
 @client.on_message(filters.text & IsMe)
@@ -23,6 +25,8 @@ async def main_handler(bot, m):
     user = m.from_user
     txt = m.text.split()
     command = txt[0].replace("/", "")
+
+    
 
     if command in ["send_message", "join_chats","leave_chats", "ref","click","send_contact", "add_contact", "send_reaction","send_vote", "unsend_vote", "export_chats","captcha", "watch"]:
         kwargs = parse_kwargs(m.text, txt[0])
