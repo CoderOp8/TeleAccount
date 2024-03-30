@@ -15,7 +15,7 @@ def is_me(filter,cli,update):
         return update.from_user.id == cli.me.id
     except:
         return False
-
+console = Console()
 console.print("🚀 NASA Script Is Running...", style="bold green")
 
 IsMe = filters.create(is_me, "IsMe")
